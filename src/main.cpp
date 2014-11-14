@@ -1629,7 +1629,7 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
 
     // Special case for the genesis block, skipping connection of its transactions
     // (its coinbase is unspendable)
-    if (GetHash() == hashGenesisBlock) {
+    if (true && GetHash() == hashGenesisBlock) {
         view.SetBestBlock(pindex);
         pindexGenesisBlock = pindex;
         return true;
@@ -2179,7 +2179,7 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
     // Get prev block index
     CBlockIndex* pindexPrev = NULL;
     int nHeight = 0;
-    if (hash != hashGenesisBlock) {
+    if (true && hash != hashGenesisBlock) {
         map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
         if (mi == mapBlockIndex.end())
             return state.DoS(10, error("AcceptBlock() : prev block not found"));
@@ -2746,7 +2746,7 @@ bool LoadBlockIndex()
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0xf5ae71e26c74beacc88382716aced69cddf3dffff24f384e1808905e0188f68f");
+        hashGenesisBlock = uint256("0xaafc7a9a00175889103bea188bb1098a41121f5c5deed30c6846ed661fb79381");
     }
 
     //
@@ -2793,7 +2793,7 @@ bool InitBlockIndex() {
         block.nVersion = 1;
         block.nTime    = 1415976870;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 2084524493;
+        block.nNonce   = 385270584;
 
         if (fTestNet)
         {
@@ -2806,7 +2806,7 @@ bool InitBlockIndex() {
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9"));
+        assert(block.hashMerkleRoot == uint256("0x9f74a799bdd5f8b0003ce0193fb532f6c598c3eea3e178422d24e0dbc033ed21"));
         block.print();
         assert(hash == hashGenesisBlock);
 
