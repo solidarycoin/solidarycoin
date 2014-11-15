@@ -35,7 +35,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x12a765e31ffd4059bada1e25190f6e98c99d9714d334efa41a195a7e7e04bfe2");
+uint256 hashGenesisBlock("0x2ef3a85b78b793baf547f059676a01120cf4cd138c5963f793492a76bfd99712");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Solidarycoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -1629,7 +1629,7 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
 
     // Special case for the genesis block, skipping connection of its transactions
     // (its coinbase is unspendable)
-    if (true && GetHash() == hashGenesisBlock) {
+    if (GetHash() == hashGenesisBlock) {
         view.SetBestBlock(pindex);
         pindexGenesisBlock = pindex;
         return true;
@@ -2179,7 +2179,7 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
     // Get prev block index
     CBlockIndex* pindexPrev = NULL;
     int nHeight = 0;
-    if (true && hash != hashGenesisBlock) {
+    if (hash != hashGenesisBlock) {
         map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
         if (mi == mapBlockIndex.end())
             return state.DoS(10, error("AcceptBlock() : prev block not found"));
@@ -2746,7 +2746,7 @@ bool LoadBlockIndex()
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0xaafc7a9a00175889103bea188bb1098a41121f5c5deed30c6846ed661fb79381");
+        hashGenesisBlock = uint256("0x2ef3a85b78b793baf547f059676a01120cf4cd138c5963f793492a76bfd99712");
     }
 
     //
@@ -2793,12 +2793,12 @@ bool InitBlockIndex() {
         block.nVersion = 1;
         block.nTime    = 1415976870;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 385270584;
+        block.nNonce   = 596429;
 
         if (fTestNet)
         {
             block.nTime    = 1415976870;
-            block.nNonce   = 385270584;
+            block.nNonce   = 596429;
         }
 
         //// debug print
@@ -2806,7 +2806,7 @@ bool InitBlockIndex() {
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x9f74a799bdd5f8b0003ce0193fb532f6c598c3eea3e178422d24e0dbc033ed21"));
+        assert(block.hashMerkleRoot == uint256("0x9f74a799bdd5f8b0003ce0193fb532f6c598c3eea3e178422d24e0dbc033ed21"));		
         block.print();
         assert(hash == hashGenesisBlock);
 
